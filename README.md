@@ -7,3 +7,5 @@
 > Código: 45909 |  
 > sensei: Marcos Pinardi | 
 
+## Definición: OOP vs Procedural
+
