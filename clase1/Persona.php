@@ -5,7 +5,10 @@
         private $nombre;
         private $apellido;
 
-
+        public function verDatos()
+        {
+            return 'muestreo de datos';
+        }
 
         /**
          * @return mixed
