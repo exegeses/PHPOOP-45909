@@ -7,7 +7,10 @@
 
         public function verDatos()
         {
-            return 'muestreo de datos';
+            $mensaje = 'Nombre: '.$this->getNombre().'<br>';
+            $mensaje .= 'Apellido: '.$this->getApellido().'<br>';
+
+            return $mensaje;
         }
 
         /**
