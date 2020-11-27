@@ -1,5 +1,10 @@
 <?php
     require 'config/config.php';
+    require 'clases/Conexion.php';
+    require 'clases/Region.php';
+    //instanciar + llamar a método
+    $Region = new Region;
+    $regiones = $Region->listarRegiones();
     include 'includes/over-all-header.html';
     include 'includes/nav.php';
 ?>
@@ -10,6 +15,7 @@
 
         <table class="table table-borderless table-striped table-hover">
             <thead>
+            <tr>
                 <th>#</th>
                 <th>Región</th>
                 <th colspan="2">
@@ -17,10 +23,15 @@
                         Agregar
                     </a>
                 </th>
+            </tr>
             </thead>
             <tbody>
-                <td>id</td>
-                <td>nombre</td>
+<?php
+            foreach ( $regiones as $region ) {
+?>
+            <tr>
+                <td><?= $region['regID'] ?></td>
+                <td><?= $region['regNombre'] ?></td>
                 <td>
                     <a href="formAgregarModificar.php" class="btn btn-outline-secondary">
                         Modificar
@@ -31,6 +42,10 @@
                         Eliminar
                     </a>
                 </td>
+            </tr>
+<?php
+            }
+?>
             </tbody>
         </table>
 
