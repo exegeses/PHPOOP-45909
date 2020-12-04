@@ -18,7 +18,7 @@
         {
             $link = Conexion::conectar();
             $sql = "SELECT destID, destNombre,
-                           destinos.regID, regiones.regNombre
+                           destinos.regID, regiones.regNombre,
                            destPrecio, 
                            destAsientos, destDisponibles,
                            destActivo
