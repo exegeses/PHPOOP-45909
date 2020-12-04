@@ -22,13 +22,19 @@
             $regNombre = $_POST['regNombre'];
             $link = Conexion::conectar();
             $sql = "INSERT INTO regiones
-                        VALUE
+                        VALUE 
                              ( DEFAULT, :regNombre )";
             $stmt = $link->prepare($sql);
             //data binding
             $stmt->bindParam(':regNombre', $regNombre, PDO::PARAM_STR);
 
-            return $stmt->execute();
+            if( $stmt->execute() ){
+                //asignamos atributos
+                $this->setRegID( $link->lastInsertId() );
+                $this->setRegNombre($regNombre);
+                return $this;
+            }
+            return false;
 
         }
         
