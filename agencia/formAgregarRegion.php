@@ -14,7 +14,7 @@
 
                     <div class="form-group">
                     <label for="regNombre">Nombre de la región:</label>
-                    <input type="text" name="regNombre" 
+                    <input type="text" name="regNombre" required
                            id="regNombre" class="form-control">
                     </div>
 

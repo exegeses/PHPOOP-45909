@@ -17,6 +17,21 @@
             return $regiones;
         }
 
+        public function agregarRegion()
+        {
+            $regNombre = $_POST['regNombre'];
+            $link = Conexion::conectar();
+            $sql = "INSERT INTO regiones
+                        VALUE
+                             ( DEFAULT, :regNombre )";
+            $stmt = $link->prepare($sql);
+            //data binding
+            $stmt->bindParam(':regNombre', $regNombre, PDO::PARAM_STR);
+
+            return $stmt->execute();
+
+        }
+        
         /**
          * @return mixed
          */
