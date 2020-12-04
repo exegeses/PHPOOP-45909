@@ -22,7 +22,10 @@
 ?>
 
         <div class="alert alert-<?= $css ?> col-6 mx-auto">
-            <?= $mensaje ?>
+            <?= $mensaje ?> <br>
+            <a href="adminRegiones.php" class="btn btn-light">
+                Volver a panel
+            </a>
         </div>
 
     </main>
