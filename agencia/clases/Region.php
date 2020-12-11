@@ -77,7 +77,25 @@
             }
             return false;
         }
-        
+
+        public function eliminarRegion()
+        {
+            $regID = $_POST['regID'];
+            $regNombre = $_POST['regNombre'];
+            $link = Conexion::conectar();
+            $sql = "DELETE FROM regiones
+                        WHERE regID = :regID";
+            $stmt = $link->prepare($sql);
+            $stmt->bindParam(':regID', $regID, PDO::PARAM_INT);
+            if( $stmt->execute() ){
+                //registramos atributos
+                $this->setRegID($regID);
+                $this->setRegNombre($regNombre);
+                return $this;
+            }
+            return false;
+        }
+
         /**
          * @return mixed
          */
