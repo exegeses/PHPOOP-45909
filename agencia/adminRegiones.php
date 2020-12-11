@@ -33,12 +33,12 @@
                 <td><?= $region['regID'] ?></td>
                 <td><?= $region['regNombre'] ?></td>
                 <td>
-                    <a href="formAgregarModificar.php" class="btn btn-outline-secondary">
+                    <a href="formModificarRegion.php?regID=<?= $region['regID'] ?>" class="btn btn-outline-secondary">
                         Modificar
                     </a>
                 </td>
                 <td>
-                    <a href="formAgregarEliminar.php" class="btn btn-outline-secondary">
+                    <a href="formEliminarRegion.php?regID=<?= $region['regID'] ?>" class="btn btn-outline-secondary">
                         Eliminar
                     </a>
                 </td>
