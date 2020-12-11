@@ -30,6 +30,33 @@
             return $destinos;
         }
 
+        public function verDestinoPorID()
+        {
+            $destID = $_GET['destID'];
+            $link = Conexion::conectar();
+            $sql = "SELECT destID, destNombre,
+                           destinos.regID, regiones.regNombre,
+                           destPrecio, 
+                           destAsientos, destDisponibles,
+                           destActivo
+                       FROM destinos, regiones
+                       WHERE destinos.regID = regiones.regID
+                        AND  destinos.destID = :destID";
+            $stmt = $link->prepare($sql);
+            $stmt->bindParam(':destID', $destID, PDO::PARAM_INT);
+            $stmt->execute();
+            $destino = $stmt->fetch();
+            //registrar todos los atributos
+            $this->setDestID($destino['destID']);
+            $this->setDestNombre($destino['destNombre']);
+            $this->setRegID($destino['regID']);
+            self::setRegNombre($destino['regNombre']);
+            $this->setDestPrecio($destino['destPrecio']);
+            $this->setDestAsientos($destino['destAsientos']);
+            $this->setDestDisponibles($destino['destDisponibles']);
+            return $this;
+        }
+
         public function agregarDestino()
         {
             $destNombre = $_POST['destNombre'];
@@ -62,6 +89,45 @@
             return false;
         }
 
+        public function modificarDestino()
+        {
+            $destID = $_POST['destID'];
+            $destNombre = $_POST['destNombre'];
+            $regID = $_POST['regID'];
+            $destPrecio = $_POST['destPrecio'];
+            $destAsientos = $_POST['destAsientos'];
+            $destDisponibles = $_POST['destDisponibles'];
+            $link = Conexion::conectar();
+            $sql = "UPDATE destinos
+                        SET 
+                            destNombre = :destNombre,
+                            regID = :regID,
+                            destPrecio = :destPrecio,
+                            destAsientos = :destAsientos,
+                            destDisponibles = :destDisponibles
+                        WHERE 
+                            destID = :destID";
+            $stmt = $link->prepare($sql);
+            $stmt->bindParam(':destNombre', $destNombre, PDO::PARAM_STR);
+            $stmt->bindParam(':regID', $regID, PDO::PARAM_INT);
+            $stmt->bindParam(':destPrecio', $destPrecio, PDO::PARAM_INT);
+            $stmt->bindParam(':destAsientos', $destAsientos, PDO::PARAM_INT);
+            $stmt->bindParam(':destDisponibles', $destDisponibles, PDO::PARAM_INT);
+            $stmt->bindParam(':destID', $destID, PDO::PARAM_INT);
+
+            if( $stmt->execute() ){
+                $this->setDestID( $destID );
+                $this->setDestNombre($destNombre);
+                $this->setRegID($regID);
+                $this->setDestPrecio($destPrecio);
+                $this->setDestAsientos($destAsientos);
+                $this->setDestDisponibles($destDisponibles);
+                $this->setDestActivo(1);//default
+                return $this;
+            }
+            return false;
+        }
+        
         /**
          * @return mixed
          */
